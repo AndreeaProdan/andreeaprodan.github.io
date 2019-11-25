@@ -1,5 +1,10 @@
 html{height: 100%;}
 
+table
+{
+  border-collapse: collapse;
+  width: 100%;
+}
 body
 { font-family: "lucida sans", arial, sans-serif;
   padding: 0px;
@@ -51,7 +56,9 @@ a:hover
 img
 { border: 0px; 
   margin: 0px; 
-  padding: 0px;}
+  padding: 0px;
+  width: 100%
+}
 
 a
 { outline: none;}
@@ -104,7 +111,8 @@ ol li
 { padding-bottom: 40px;}
 
 #header
-{ background: transparent url(logo.jpg) no-repeat;}
+{ background: transparent url(logo.jpg) no-repeat; background-size:cover
+}
 
 #logo
 { width: 860px;

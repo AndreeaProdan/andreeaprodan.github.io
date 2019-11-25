@@ -1,11 +1,14 @@
 <!DOCTYPE HTML>
-<html>
+<html
+	prefix="schema: http://schema.org/
+		sa:https://ns.science.ai/"
+	lang="en">
 
 <head>
   <title>WTra WADe</title>
   <meta name="description" content="This is a page where you can find the technical report for WTra" />
   <meta name="keywords" content="project, infoiasi, wade, web, wtra" />
-  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" type="text/css" href="style/style.css" />
 </head>
 
@@ -31,9 +34,72 @@
             <a href="https://www.info.uaic.ro/en/home-page-2/" property="schema:name">Faculty of Computer Science</a> 
           </span>.
           <br/>
-          The project is about developing a (micro)service-based Web system where user(s) can introduce a video recording where is captured an urban route. The input video will be processed and the traffic signs will be recognized and reported. For detection will be used a specific public API. With the information that is gathering, a specific ontology specified in OWL will be created. For each recognized road sign, a SPARQL endpoint will offer various information about it like meaning, type, legal regulations, context of use etc. 
+          The project is about developing a (micro)service-based Web system where user(s) can introduce a video recording where is captured an urban route. The input video will be processed and the traffic signs will be recognized and reported. For detection, a specific public API will be used . With the information that is gathered, a specific ontology specified in OWL will be created. For each recognized road sign, a SPARQL endpoint will offer various information about it, like meaning, type, legal regulations, context of use etc. 
       		</p>
-      	<section>  
+      	</section> 
+
+      	<section>
+      		<h3>Diagrams</h3>
+      		<figure typeof="sa:image">
+      			<img src="https://raw.githubusercontent.com/danCazacu/WTra/master/diagrams/Video%20Processing%20Diagram.jpg">
+				<figcaption>Basic Use Case flow</figcaption>
+      		</figure>
+      		<br/>
+      		<br/>
+      		<p>In this scenario, the user uploads a video to our service, either via Web App or REST API. After the video is succesfully uploaded, it will be stored in our AWS S3 environment while waiting in queue to be processed by the <i>Video Processing Unit</i>. The user can query the <i>/video/results</i> endpoint to retrieve the processed video. He can either get a 202 status code which means that the video has not yet been processed or a 200 status code with the processed information. After the video has been processed we will store the relevant information into a different storage unit.</p>
+      	</section> 
+
+      	<section>
+      		<h3>Technology Stack</h3>
+      		<p>Here you can find the tools that we thought are best suited for developing this solution.</p>
+      		<figure typeof="sa:table">
+				<table>
+				<caption>WTra Technology Stack</caption>
+				<tr>
+					<th>Component</th>
+					<th>Tools</th>
+				</tr>
+				<tr>
+					<td>Back End</td>
+					<td>Java, Spring Boot</td>
+				</tr>
+				<tr>
+					<td>Front End</td>
+					<td>Javascript</td>
+				</tr>
+				<tr>
+					<td>Cloud Storage</td>
+					<td>Amazon S3</td>
+				</tr>
+				<tr>
+					<td>Cloud Computing</td>
+					<td>Amazon EC2</td>
+				</tr>
+				<tr>
+					<td>Deployment</td>
+					<td>Amazon Elastic Beanstalk</td>
+				</tr>
+				<tr>
+					<td>SQL</td>
+					<td>Amazon RDS</td>
+				</tr>
+				<tr>
+					<td>Code Management</td>
+					<td>Github</td>
+				</tr>
+				</table>
+			</figure>
+		</section>
+
+		<section>
+			<h3>Swagger API Documentation</h3>
+			<p>For the time being we have structure our API with four major endpoints described in the picture below</p>
+			<figure tabindex="so:image">
+				<img src="style/api.png">
+				<figcaption>Endpoints</figcaption>
+			</figure>
+			<p>You can always check our API documentation and relevant information by visiting the following Swagger API reference <a href="https://app.swaggerhub.com/apis-docs/danCazacu/WTra/1.0.0">here</a></p>
+		</section>
 
 		<section typeof="sa:AuthorsList" role="doc-endnotes">
 		  <h2>Authors</h2>
@@ -71,7 +137,6 @@
 		    </li>
 		  </ul>
 		</section>
-
       </div>
     </div>
     <div id="footer">
