@@ -27,7 +27,7 @@
         <h1>WTra</h1>
         <p>Technical report for Web Traffic Signs Project.
          <section>      
-     		 <h3>Introduction</h3>
+     		 <h2>Introduction</h2>
         	<p> Web Traffic Signs (WTra) is a web project, part of a  <span typeof="schema:Course" resource="https://profs.info.uaic.ro/~busaco/teach/courses/wade/">
             <a href="https://profs.info.uaic.ro/~busaco/teach/courses/wade/" property="schema:name">Web Application Development</a> 
           </span>course studied by master students enrolled at <span typeof="schema:Organization" resource="https://www.info.uaic.ro/en/home-page-2/">
@@ -39,22 +39,22 @@
       	</section> 
 
       	<section>
-      		<h3>Diagrams</h3>
+      		<h2>Diagrams</h2>
       		<figure typeof="sa:image">
       			<img src="https://raw.githubusercontent.com/danCazacu/WTra/master/diagrams/Video%20Processing%20Diagram.jpg">
 				<figcaption>Basic Use Case flow</figcaption>
       		</figure>
       		<br/>
       		<br/>
-      		<p>In this scenario, the user uploads a video to our service, either via Web App or REST API. After the video is succesfully uploaded, it will be stored in our AWS S3 environment while waiting in queue to be processed by the <i>Video Processing Unit</i>. The user can query the <i>/video/results</i> endpoint to retrieve the processed video. He can either get a 202 status code which means that the video has not yet been processed or a 200 status code with the processed information. After the video has been processed we will store the relevant information into a different storage unit.</p>
+      		<p>In this scenario, the user uploads a video to our service, either via Web App or REST API. After the video is succesfully uploaded, it will be stored in our AWS S3 environment while waiting in queue to be processed by the <i>Video Processing Unit</i>. The user can query the <i>/video/result/{videoId}</i> endpoint to retrieve the processed video. He can either get a 202 status code which means that the video has not yet been processed or a 200 status code with the processed information. After the video has been processed we will store the relevant information into a different storage unit.</p>
       	</section> 
 
       	<section>
-      		<h3>Technology Stack</h3>
+      		<h2>Technology Stack</h2>
       		<p>Here you can find the tools that we thought are best suited for developing this solution.</p>
       		<figure typeof="sa:table">
 				<table>
-				<caption>WTra Technology Stack</caption>
+				<caption>WTra Technology Stack </caption>
 				<tr>
 					<th>Component</th>
 					<th>Tools</th>
@@ -92,13 +92,39 @@
 		</section>
 
 		<section>
-			<h3>Swagger API Documentation</h3>
-			<p>For the time being we have structure our API with four major endpoints described in the picture below</p>
-			<figure tabindex="so:image">
+			<h2>Swagger API Documentation</h2>
+			<p>For the time being we have structured our API with four major endpoints </p>
+			<figure typeof="so:image">
 				<img src="style/api.png">
 				<figcaption>Endpoints</figcaption>
 			</figure>
+
+			<p>Video upload will be offered at the endpoint <i>/video/upload</i>, you can call this endpoint with the HTTP method POST with body set to multipart/data-form and containing the video data.</p>
+			<p>For the momment this is very strict, and if you call this endpoint in a different way besides the one specified above, you will receive an exception message.</p>
+			<p>In the case of a succesfully uploaded video, you will receive a similar response as in this image. You will receive the uploaded video <i>ID</i> and the endpoint where you can query to get your results.</p>
+			<figure typeof="so:image">
+				<img src="style/uploadResponse.png" style="width: 50%">
+				<figcaption>Upload Response</figcaption>
+			</figure>
+			<br/>
+			<p>Your video will be put into a queue and it will be processed once resources are available</p>
+			<p><i>/video/result/{id}</i> can be queried anytime, although the result may be different depending on the state of your request.</p>
+			<figure typeof="so:image">
+				<img src="style/getResultsResponse.png" style="width: 50%">
+				<figcaption><i>/video/result/{id}</i> response</figcaption>
+			</figure>
+			<p>The status code reponse for this endpoint may differ in order to let the user know the state if its request.</p>
+			<figure typeof="so:image">
+				<img src="style/getResultStatusCode.png">
+				<figcaption><i>/video/result/{id}</i> status codes</figcaption>
+			</figure>
+			<p>The overview picture over the API flow and general responses are presented in the image below</p>
+			<figure typeof="so:image">
+				<img src="https://raw.githubusercontent.com/danCazacu/WTra/master/diagrams/Rest%20Base%20App%20via%20API%20or%20User%20Interface%20Call.jpg">
+				<figcaption>Endpoints Diagram</figcaption>
+			</figure>
 			<p>You can always check our API documentation and relevant information by visiting the following Swagger API reference <a href="https://app.swaggerhub.com/apis-docs/danCazacu/WTra/1.0.0">here</a></p>
+			
 		</section>
 
 		<section typeof="sa:AuthorsList" role="doc-endnotes">
