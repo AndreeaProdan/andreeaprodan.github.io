@@ -18,6 +18,11 @@ p
   padding: 0px 0px 16px 0px;
   line-height: 1.7em;}
 
+div.a {
+   -webkit-text-decoration-line: line-through;
+   text-decoration-line: line-through; 
+}
+
 h1, h2, h3, h4, h5, h6 
 { font: normal 179% 'century gothic', arial, sans-serif;
   color: #43423F;

@@ -46,7 +46,7 @@
       		</figure>
       		<br/>
       		<br/>
-      		<p>In this scenario, the user uploads a video to our service, either via Web App or REST API. After the video is succesfully uploaded, it will be stored in our AWS S3 environment while waiting in queue to be processed by the <i>Video Processing Unit</i>. The user can query the <i>/video/result/{videoId}</i> endpoint to retrieve the processed video. He can either get a 202 status code which means that the video has not yet been processed or a 200 status code with the processed information. After the video has been processed we will store the relevant information into a different storage unit.</p>
+      		<p>In this scenario, the user uploads a video to our service, either via Web App or REST API. After the video is succesfully uploaded, it will be stored in our AWS S3 environment while waiting in queue to be processed by the <i>Video Processing Unit</i>. The user can query the <i>/videos/{videoId}</i> endpoint to retrieve the processed video. He can either get a 202 status code which means that the video has not yet been processed or a 200 status code with the processed information. After the video has been processed we will store the relevant information into a different storage unit.</p>
       	</section> 
 
       	<section>
@@ -65,7 +65,7 @@
 				</tr>
 				<tr>
 					<td>Front End</td>
-					<td>Javascript</td>
+					<td>Javascript<br/> <b>CSS</b><br/> <b>HTML</b><br/> <b>Spring MVC</b></td>
 				</tr>
 				<tr>
 					<td>Cloud Storage</td>
@@ -81,7 +81,7 @@
 				</tr>
 				<tr>
 					<td>SQL</td>
-					<td>Amazon RDS</td>
+					<td>Amazon RDS - <b>PostgreSQL</b></td>
 				</tr>
 				<tr>
 					<td>Code Management</td>
@@ -89,7 +89,8 @@
 				</tr>
 				<tr>
 					<td>Semantic Web</td>
-					<td>Apache Jena <br/> Apache Jena Fuseki</td>
+					<td><div class="a">Apache Jena</div> <br/> <div class="a">Apache Jena Fuseki</div><br/>
+					<b>Protege 5.5.0</b> <br/> <b>Stardog</b></td>
 				</tr>
 				</table>
 			</figure>
@@ -97,13 +98,13 @@
 
 		<section>
 			<h2>Swagger API Documentation</h2>
-			<p>For the time being we have structured our API with four major endpoints </p>
+			<p>For the time when we presented D component of the project, we have structured our API with four major endpoints </p>
 			<figure typeof="so:image">
 				<img src="style/api.png">
 				<figcaption>Endpoints</figcaption>
 			</figure>
 
-			<p>Video upload will be offered at the endpoint <i>/video/upload</i>, you can call this endpoint with the HTTP method POST with body set to multipart/data-form and containing the video data.</p>
+			<p>Video upload will be offered at the endpoint <i>/videos/upload</i>, you can call this endpoint with the HTTP method POST with body set to multipart/data-form and containing the video data.</p>
 			<p>For the momment this is very strict, and if you call this endpoint in a different way besides the one specified above, you will receive an exception message.</p>
 			<p>In the case of a succesfully uploaded video, you will receive a similar response as in this image. You will receive the uploaded video <i>ID</i> and the endpoint where you can query to get your results.</p>
 			<figure typeof="so:image">
@@ -112,23 +113,28 @@
 			</figure>
 			<br/>
 			<p>Your video will be put into a queue and it will be processed once resources are available</p>
-			<p><i>/video/result/{id}</i> can be queried anytime, although the result may be different depending on the state of your request.</p>
+			<p><i>/videos/{id}</i> can be queried anytime, although the result may be different depending on the state of your request.</p>
 			<figure typeof="so:image">
 				<img src="style/getResultsResponse.png" style="width: 50%">
-				<figcaption><i>/video/result/{id}</i> response</figcaption>
+				<figcaption><i>/videos/{id}</i> response</figcaption>
 			</figure>
 			<p>The status code reponse for this endpoint may differ in order to let the user know the state if its request.</p>
 			<figure typeof="so:image">
 				<img src="style/getResultStatusCode.png">
-				<figcaption><i>/video/result/{id}</i> status codes</figcaption>
+				<figcaption><i>/videos/{id}</i> status codes</figcaption>
 			</figure>
+			<p>In the meanwhile we added a login enpoint, so the our application could be easily integrated in an API driven application. <br/> The endpoint returns a token of 32 characters which is used in the session, so the user has access (or doesn't) to the API endpoints. The token is valid for 5 minutes for now.</p>
+			<figure typeof="so:image">
+				<img src="style/loginEndpoint.png">
+				<figcaption><i>/login</i> response</figcaption>
+			</figure>
+			
 			<p>The overview picture over the API flow and general responses are presented in the image below</p>
 			<figure typeof="so:image">
-				<img src="https://raw.githubusercontent.com/danCazacu/WTra/master/diagrams/Rest%20Base%20App%20via%20API%20or%20User%20Interface%20Call.jpg">
+				<img src="style/APICalls.jpg">
 				<figcaption>Endpoints Diagram</figcaption>
 			</figure>
 			<p>You can always check our API documentation and relevant information by visiting the following Swagger API reference <a href="https://app.swaggerhub.com/apis-docs/danCazacu/WTra/1.0.0">here</a></p>
-			
 		</section>
 
 		<section typeof="sa:AuthorsList" role="doc-endnotes">
