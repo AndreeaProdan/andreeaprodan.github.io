@@ -61,11 +61,11 @@
 				</tr>
 				<tr>
 					<td>Back End</td>
-					<td>Java, Spring Boot</td>
+					<td>Java <br/> Spring Boot <br/> <b>Spring MVC</b></td>
 				</tr>
 				<tr>
 					<td>Front End</td>
-					<td>Javascript<br/> <b>CSS</b><br/> <b>HTML</b><br/> <b>Spring MVC</b></td>
+					<td>Javascript<br/> <b>CSS</b><br/> <b>HTML</b></td>
 				</tr>
 				<tr>
 					<td>Cloud Storage</td>
@@ -112,17 +112,20 @@
 				<figcaption>Upload Response</figcaption>
 			</figure>
 			<br/>
+			
 			<p>Your video will be put into a queue and it will be processed once resources are available</p>
 			<p><i>/videos/{id}</i> can be queried anytime, although the result may be different depending on the state of your request.</p>
 			<figure typeof="so:image">
 				<img src="style/getResultsResponse.png" style="width: 50%">
 				<figcaption><i>/videos/{id}</i> response</figcaption>
 			</figure>
+			
 			<p>The status code reponse for this endpoint may differ in order to let the user know the state if its request.</p>
 			<figure typeof="so:image">
 				<img src="style/getResultStatusCode.png">
 				<figcaption><i>/videos/{id}</i> status codes</figcaption>
 			</figure>
+			
 			<p>In the meanwhile we added a login enpoint, so the our application could be easily integrated in an API driven application. <br/> The endpoint returns a token of 32 characters which is used in the session, so the user has access (or doesn't) to the API endpoints. The token is valid for 5 minutes for now.</p>
 			<figure typeof="so:image">
 				<img src="style/loginEndpoint.png">
@@ -135,6 +138,42 @@
 				<figcaption>Endpoints Diagram</figcaption>
 			</figure>
 			<p>You can always check our API documentation and relevant information by visiting the following Swagger API reference <a href="https://app.swaggerhub.com/apis-docs/danCazacu/WTra/1.0.0">here</a></p>
+		</section>
+		
+		<section>
+			<h2>Using Spring MVC</h2>
+			<p>Spring MVC is a Java framework used to build web application by following the Model-View-Controller design pattern. The design pattern was used easily by the help of <i>DispactchServlet</i>, a class which receives requests and maps it to the right resurce (controller/model/views)</p>
+			<figure typeof="so:image">
+				<img src="style/SpringMVC.png">
+				<figcaption>Endpoints Diagram</figcaption>
+			</figure>
+			<h3>Spring advantages & disadvantages</h3>
+			<p>Some of the advantages of the Spring: </p>
+			<ul>
+				<li>Roles separation: specialized objects for models, controllers, view respolvers, validators etc. (Spring MVC particular) </li>
+				<li>No need server: develop and deploy application via light-weight servlet container.</li>
+				<li>Powerful configuration: robust configuration for both framework and aplication classes (easy referencing across contexts - e.g.: web controllers to business objects and validators).</li>
+				<li>Flexible mapping: specific annotations provided for easily redirect to pages.</li>
+				<li>No need to reinvent the wheel and also the reusability of the business models.</li>
+				<li>Dependency Injection and Inversion of Control</li>
+			</ul>
+			
+			<p>Some of the disadvantages of the Spring: </p>
+			<ul>
+				<li>Complexity of Spring: more than 2400 classes, 49 tools (such as Spring MVC, Spring Boot). </li>
+				<li>High learning curves: for a new developer can be wuite difficult to learn Spring framework due to the fact that is uses new programming methods.</li>
+				<li>Tons of parallel mechanisms: this is also an advantage, but can easily cause confusion.</li>
+				<li>Lots of XML: for configuration for example .</li>
+				<li>Lack of guidelines: no clear guidlines on topics such XSS attacks or CSRF attacks; also if a jar file present in app, then it will run.</li>
+			</ul>
+		</section>
+		
+		<section>
+			<h2>Generate OWL via Protege 5.5.0</h2>
+		</section>
+		
+		<section>
+			<h2>Using Stardog instead of Fuseki</h2>
 		</section>
 
 		<section typeof="sa:AuthorsList" role="doc-endnotes">
