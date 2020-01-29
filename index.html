@@ -147,6 +147,42 @@
 		</section>
 		
 		<section>
+			<h2>Web Application</h2>
+			<h3>LogIn / Register </h3>
+			<p>The user has to register first in order to have access to the application. The password will be sent encoded in <i>Base64</i>. The database used for storing the users is <i>AmazonRDS</i>.</p>
+			<figure typeof="so:image">
+				<img src="style/Register.png">
+				<figcaption>Register</figcaption>
+			</figure>
+			
+			<p>After registration the user can log in to use the available services. A token will be generated and stored in cookies for security reasons. The token is set to expire after 1 minute. Without this token, the user has not rights to upload videos.</p>
+			<figure typeof="so:image">
+				<img src="style/LogIn.png">
+				<figcaption>Log In</figcaption>
+			</figure>
+		
+			<h3> After LogIn </h3>
+			<p>You can load videos from your pc. The video will be saved in the database, and parsed for getting the results. To see the results from the video parsing please go to <a href="http://wtra.eu-west-1.elasticbeanstalk.com/uploads" property="schema:url">Your Uploads</a> page.</p>
+			<figure typeof="so:image">
+				<img src="style/VideoUpload.png">
+				<figcaption>Home : Upload Video - upload a video file</figcaption>
+			</figure>
+			
+			<p>This page is useful for seeing the uploaded videos and the result for each of it. The result shows how long the video is, the name, and the country from where the video is. Also for each sign spotted it is showed the name, the video stamp where it appears, and longitude and latitude coordinates. Also a description of the sign can be found when you hover the image.</p>
+			<figure typeof="so:image">
+				<img src="style/YourUploads.png">
+				<figcaption>Your Uploads - see uploaded videos and the signs that were spotted in the videos</figcaption>
+			</figure>
+			
+			<p>This page is useful for seeing all traffic signs that the ontology created by us is currently supported. The traffic signs are loaded by using a  <a href="https://www.w3.org/TR/rdf-sparql-query" property="schema:url">SPARQL Query</a> via <a href="https://www.stardog.com" property="schema:url">StarDog</a></p>
+			<figure typeof="so:image">
+				<img src="style/TrafficSigns.png">
+				<figcaption>Traffic Signs - see all the signs from the ontology</figcaption>
+			</figure>
+		</section>
+		</section>
+		
+		<section>
 			<h2>Using Spring MVC</h2>
 			<p>Spring MVC is a Java framework used to build web application by following the Model-View-Controller design pattern. The design pattern was used easily by the help of <i>DispactchServlet</i>, a class which receives requests and maps it to the right resurce (controller/model/views)</p>
 			<figure typeof="so:image">
@@ -176,6 +212,29 @@
 		
 		<section>
 			<h2>Generate OWL via Protege 5.5.0</h2>
+			<p><a href="https://protege.stanford.edu" property="schema:url">Protege</a> is the ontology editor that we chose to use for <i>wtra</i> ontology. This framework is free and open-source.</p> <br/>
+			<p> We defined a super class <b>Signs</b> and some other classes, including <b>Traffic Sign</b>. There are 5 types of traffic signs: </p>
+			<ul>
+				<li>1. <b>Information</b> Sign</li>
+				<li>2. <b>Mandatory</b> Sign</li>
+				<li>3. <b>Priority</b> Sign</li>
+				<li>4. <b>Prohibitory</b> Sign</li>
+				<li>5. <b>Warning</b> Sign</li>
+			</ul>
+			<p> A sign can be part of more than one traffic signs types defined above.</p>
+			<p>Each sign has the following object properties:</p>
+			<ul>
+				<li>1. <b>hasForm</b> used for specifying the form of the sign. (also we defined a <i>Shape</i> class, and the individuals needed: Circle, Square ... )</li>
+				<li>2. <b>hasBackgroundColor</b> used for specifying the color of the background for the sign (the color has been defined as a individual in <i>Color</i> class) </li>
+				<li>3. <b>hasBorderColor</b> used for specifying the color of the border for the sign (which is also chosen from <i>Color</i> class)</li>
+				<li>4. <b>applicableTo</b> used to specify if the sign is applicable to <i>Driver</i> or/and <i>Pedestrian</i></li>
+			</ul>
+			<p>Each sign has the following data properties:</p>
+			<ul>
+				<li>1. <b>hasImageLink</b> used for keeping a url to a picture with the sign</li>
+				<li>2. <b>hasLegalRegulations</b> used for keeping the legal regulations of the sign</li>
+			</ul>
+			<p>Also a sign can be <i>Same Individual As</i> another one, which means that we have 2 (or more signs) which have the same meaning, but may have different properties (e.g.: in some countries has the background yellow, and in another ones white). </p>
 			<figure typeof="so:image">
 				<img src="style/OwlProtege.jpg">
 				<figcaption>OWL Protege 5.5.0</figcaption>
@@ -184,6 +243,25 @@
 		
 		<section>
 			<h2>Using Stardog instead of Fuseki</h2>
+			<p> We first thought about using <a href="https://jena.apache.org/documentation/fuseki2" property="schema:url">Fuseki</a> for SparQL query execution, but after we configured in <a href="https://aws.amazon.com/" property="schema:url">AWS cloud services</a> and gave a small chance, we saw the we can not make use of reasoning if we don't configure another <a href="https://wiki.lyrasis.org/display/VIVO/Fuseki+with+Reasoning" property="schema:url">additional service</a>. </p>
+			<p> After some play with <a href="https://jena.apache.org/documentation/fuseki2" property="schema:url">Fuseki</a>, we tried to use <a href="https://www.stardog.com" property="schema:url">StarDog</a>, which turned out to be more useful and interesting, at least for us. </p>
+			<p> We configured the <a href="https://www.stardog.com" property="schema:url">StarDog</a> on a <a href="https://aws.amazon.com/ec2/instance-types/" property="schema:url">Amazon EC2 T2.medium</a> machine, and we used <a href="https://www.stardog.com/studio/" property="schema:url">StarDog Studio</a> for queries. As an extra point, <a href="https://www.stardog.com" property="schema:url">StarDog</a> has support for <a href="https://db-engines.com/en/ranking/graph+dbms" property="schema:url">Graph DBMS</a> which we used a little for checking if the relations we defined are right.
+			<figure typeof="so:image">
+				<img src="style/Stardog.jpg">
+				<figcaption>Stardog Studio - signs that are in Germany, but not in other countries</figcaption>
+			</figure>
+			<figure typeof="so:image">
+				<img src="style/StardogGraph.png">
+				<figcaption>Stardog Studio - Graph DBMS</figcaption>
+			</figure>
+		</section>
+		
+		<section>
+		<h2> For more information about this project, please visit also the pages: </h2>
+			<ul>
+				<li><a href="http://s3-eu-west-1.amazonaws.com/tutorial.wtra/index.html" property="schema:url">User guide</a></li>
+				<li><a href="https://dancazacu.github.io/" property="schema:url">Personal progress page</a></li>
+			</ul>
 		</section>
 
 		<section typeof="sa:AuthorsList" role="doc-endnotes">
